@@ -17,11 +17,11 @@ local config = {
     -- },
   },
   -- Set colorscheme
-  colorscheme = "kanagawa",
+  colorscheme = "duskfox",
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
     opt = {
-      relativenumber = false, -- sets vim.opt.relativenumber
+      relativenumber = true, -- sets vim.opt.relativenumber
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -36,26 +36,26 @@ local config = {
     },
     -- Modify the highlight groups
     highlights = function(highlights)
-      local C = require "kanagawa"
+      local C = require "duskfox"
 
       highlights.Normal = { fg = C.fg, bg = C.bg }
       return highlights
     end,
     plugins = { -- enable or disable extra plugin highlighting
       aerial = true,
-      beacon = false,
+      beacon = true,
       bufferline = true,
       dashboard = true,
       highlighturl = true,
-      hop = false,
+      hop = true,
       indent_blankline = true,
-      lightspeed = false,
+      lightspeed = true,
       ["neo-tree"] = true,
       notify = true,
       ["nvim-tree"] = false,
       ["nvim-web-devicons"] = true,
       rainbow = true,
-      symbols_outline = false,
+      symbols_outline = true,
       telescope = true,
       vimwiki = false,
       ["which-key"] = true,
@@ -76,7 +76,30 @@ local config = {
       -- ["goolord/alpha-nvim"] = { disable = true },
 
       -- You can also add new plugins here as well:
-      { "folke/tokyonight.nvim" },
+      {
+        "EdenEast/nightfox.nvim",
+        config = function()
+          require("nightfox").setup {
+            options = {
+                dim_inactive=true,
+                -- transparent=true,
+                styles = {
+                  comments = "italic",
+                  keywords = "bold",
+                  conditionals = "bold",
+                  constants = "underline",
+                  numbers = 'italic',
+                  types = "italic,bold,underline",
+                },
+                inverse = {
+                  match_paren = true,
+                  visual = true, -- not sure about this one
+                  search = true,
+                },
+              },
+          }
+        end,
+      },
       { "rebelot/kanagawa.nvim" },
       -- {
       --   "ray-x/lsp_signature.nvim",
